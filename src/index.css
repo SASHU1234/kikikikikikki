@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Let's map VT323 to Digital Terminal for the monospace look */
+
+@layer base {
+  body {
+    @apply bg-obsidian text-silver font-sans overflow-x-hidden antialiased;
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(255, 45, 85, 0.7), 0 0 20px rgba(255, 45, 85, 0.5);
+  }
+  
+  .border-glow {
+    box-shadow: 0 0 15px rgba(255, 45, 85, 0.4), inset 0 0 10px rgba(255, 45, 85, 0.2);
+  }
+
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes heartbeat {
+    0%, 100% { 
+      transform: scale(1); 
+      filter: drop-shadow(0 0 15px rgba(255,45,85,0.4)); 
+    }
+    50% { 
+      transform: scale(1.05); 
+      filter: drop-shadow(0 0 30px rgba(255,255,255,0.8)) drop-shadow(0 0 60px rgba(255,45,85,1)); 
+    }
+  }
+
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .animate-heartbeat-float {
+    animation: heartbeat 2s ease-in-out infinite, floatY 4s ease-in-out infinite;
+  }
+  
+  @keyframes drift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(150px, -150px); }
+  }
+
+  .bokeh-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: #ffffff;
+    opacity: 0.08;
+    filter: blur(25px);
+    pointer-events: none;
+    animation: drift 25s infinite alternate ease-in-out;
+  }
+  
+  .neon-text-stack {
+    text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4, 0 0 20px #ff1493;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(720deg) translateX(50px); opacity: 0; }
+  }
+
+  .petal {
+    position: absolute;
+    top: -10%;
+    animation: fall linear infinite;
+  }
+}
+
+/* Custom Scrollbar for sleekness */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 45, 85, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 45, 85, 0.6);
+}
